@@ -24,6 +24,7 @@ DEBUG = os.getenv("DEBUG", "False").upper() == "TRUE"
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
 
 INSTALLED_APPS = [
+    "chat",
     "daphne",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -31,7 +32,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "chat",
+    "channels",
 ]
 
 MIDDLEWARE = [
@@ -69,6 +70,15 @@ DATABASES = {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
+}
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.core.InMemoryChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
 }
 
 AUTH_PASSWORD_VALIDATORS = [

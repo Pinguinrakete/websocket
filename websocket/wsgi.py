@@ -8,13 +8,8 @@ https://docs.djangoproject.com/en/5.2/howto/deployment/wsgi/
 """
 
 import os
-
-from channels.routing import ProtocolTypeRouter
-from django.core.asgi import get_asgi_application
+from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'websocket.settings')
-django_asgi_app = get_asgi_application()
 
-application = ProtocolTypeRouter({
-    "http": django_asgi_app,
-})
+application = get_wsgi_application()
