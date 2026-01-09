@@ -23,6 +23,8 @@ DEBUG = os.getenv("DEBUG", "False").upper() == "TRUE"
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
 
+ROOT_URLCONF = 'websocket.urls'
+
 INSTALLED_APPS = [
     "chat",
     "daphne",
@@ -74,10 +76,7 @@ DATABASES = {
 
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels.layers.core.InMemoryChannelLayer",
-        "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
-        },
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
     },
 }
 
